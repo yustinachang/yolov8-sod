@@ -1,0 +1,53 @@
+视频链接:
+链接：https://pan.baidu.com/s/1VjYfAf6ESoDex1jswt6dwg?pwd=m8sc 
+提取码：m8sc # BiliBili 魔鬼面具Up
+1. 使用教程说明 2.替换主干和自带的改进说明 3.需要自行修改模块的说明 4.转换划分数据集-训练-测试-推理 5.关于BIFPN的说明
+
+链接：https://pan.baidu.com/s/1M2zDRJQqxxsu5ukXSqi_IA?pwd=q3zz 
+提取码：q3zz # BiliBili 魔鬼面具Up
+1. 如何进行断点续训
+
+链接：https://pan.baidu.com/s/1VrhtnE9-ArDqvDPb_DtLtg?pwd=ikx6 
+提取码：ikx6 # BiliBili 魔鬼面具Up
+1. 计算COCO指标教程
+
+链接：https://pan.baidu.com/s/1jYKi__nzatrJdo_9Hyy7NQ?pwd=ppjy 
+提取码：ppjy # BiliBili 魔鬼面具Up
+1.如何在yaml配置文件中添加注意力层
+
+链接：https://pan.baidu.com/s/1wSNSEVIJO46Fo3-heyTVdA?pwd=r74k 
+提取码：r74k # BiliBili 魔鬼面具Up
+1.SCConv和ScConv的使用教程
+
+链接：https://pan.baidu.com/s/1XNW0gPkxM8DxuFeqr7xUsA?pwd=4et6 
+提取码：4et6 # BiliBili 魔鬼面具Up
+1.LAWDS讲解
+
+链接：https://pan.baidu.com/s/1_I6aYSqcqB5B5LO8wdDiBQ?pwd=7ori 
+提取码：7ori # BiliBili 魔鬼面具Up
+1.EMSC,EMSCP讲解
+
+链接：https://pan.baidu.com/s/1a7s7Jur3Js7F-i4QtYFuFA?pwd=4brn 
+提取码：4brn # BiliBili 魔鬼面具Up
+1.DCNV2,DCNV3,DyHeadWithDCNV3相关讲解
+
+链接：https://pan.baidu.com/s/1mOWcDwp64D7G0qEV0RZUJA?pwd=3awi 
+提取码：3awi # BiliBili 魔鬼面具Up
+1.关于C3-XXX和C2f-XXX移植到官方yolov5上的讲解
+
+链接：https://pan.baidu.com/s/1bNP9cf2K024c7XWgpNAEwQ?pwd=97if 
+提取码：97if # BiliBili 魔鬼面具Up
+1.关于OREPA,REPVGGOREPA,EMSC-OREPA,EMSCP-OREPA的说明(视频中的EMSC-OREPA和EMSCP-OREPA模块经反应不稳定,已在后面版本去除)
+2.该如何看懂代码结构,以C2f-Faster-EMA为例
+
+链接：https://pan.baidu.com/s/1ILHwqFO91NT6cnuAIDR7kQ?pwd=96l3 
+提取码：96l3 # BiliBili 魔鬼面具Up
+1. MPCA与DCNV2_Dynamic的说明
+
+链接：https://pan.baidu.com/s/1BtL51pABdbKlQ7SBNRnMzA?pwd=ypeo 
+提取码：ypeo # BiliBili 魔鬼面具Up
+1. 20231010版本更新说明
+
+链接：https://pan.baidu.com/s/1VW9-TVwB16JLLblMtCUJog?pwd=44ap 
+提取码：44ap # BiliBili 魔鬼面具Up
+1. DAttention(Vision Transformer with Deformable Attention CVPR2022)使用注意说明.
