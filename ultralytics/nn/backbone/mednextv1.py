@@ -550,6 +550,7 @@ class MedNeXt(nn.Module):
             x = checkpoint.checkpoint(l, x, self.dummy_tensor)
         return x
 
+    self.channel = [i.size(1) for i in self.forward(torch.randn(1, 3, 640, 640))] # add
 
     def forward(self, x):
         
