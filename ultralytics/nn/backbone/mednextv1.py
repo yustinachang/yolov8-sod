@@ -537,7 +537,8 @@ class MedNeXt(nn.Module):
             self.out_4 = OutBlock(in_channels=n_channels*16, n_classes=n_classes, dim=dim)
 
         self.block_counts = block_counts
-
+        self.channel = [i.size(1) for i in self.forward(torch.randn(1, 3, 640, 640))] # add
+        
 
     def iterative_checkpoint(self, sequential_block, x):
         """
@@ -549,8 +550,6 @@ class MedNeXt(nn.Module):
         for l in sequential_block:
             x = checkpoint.checkpoint(l, x, self.dummy_tensor)
         return x
-
-    self.channel = [i.size(1) for i in self.forward(torch.randn(1, 3, 640, 640))] # add
 
     def forward(self, x):
         
