@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
 
-__all__ = ['create_mednext_v1', 'create_mednextv1_small', 'create_mednextv1_base', 'create_mednextv1_medium', 'create_mednextv1_large']
+__all__ = ['create_mednextv1_small', 'create_mednextv1_base', 'create_mednextv1_medium', 'create_mednextv1_large', 'create_mednext_v1']
 
 """Block.py"""
 class MedNeXtBlock(nn.Module):
