@@ -17,7 +17,7 @@ from ultralytics.yolo.utils.plotting import feature_visualization
 from ultralytics.yolo.utils.torch_utils import (fuse_conv_and_bn, fuse_deconv_and_bn, initialize_weights,
                                                 intersect_dicts, make_divisible, model_info, scale_img, time_sync, get_num_params)
 
-from ultralytics.nn.backbone.mednextv1 import * # add
+from ultralytics.nn.backbone.mednextv1 import * # add for mednextv1
 from ultralytics.nn.backbone.convnextv2 import *
 from ultralytics.nn.backbone.fasternet import *
 from ultralytics.nn.backbone.efficientViT import *
@@ -752,7 +752,7 @@ def parse_model(d, ch, verbose=True, warehouse_manager=None):  # model_dict, inp
             t = m
             m = timm.create_model(m, pretrained=args[0], features_only=True)
             c2 = m.feature_info.channels()
-        elif m in {mednextv1_small, mednextv1_base, mednextv1_medium, mednextv1_large, # add
+        elif m in {create_mednext_v1, create_mednextv1_small, create_mednextv1_base, create_mednextv1_medium, create_mednextv1_large, # add for mednextv1
                    convnextv2_atto, convnextv2_femto, convnextv2_pico, convnextv2_nano, convnextv2_tiny, convnextv2_base, convnextv2_large, convnextv2_huge,
                    fasternet_t0, fasternet_t1, fasternet_t2, fasternet_s, fasternet_m, fasternet_l,
                    EfficientViT_M0, EfficientViT_M1, EfficientViT_M2, EfficientViT_M3, EfficientViT_M4, EfficientViT_M5,
