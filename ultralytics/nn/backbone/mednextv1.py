@@ -278,9 +278,7 @@ class MedNeXt(nn.Module):
         kernel_size: int = 7,                      # Ofcourse can test kernel_size
         enc_kernel_size: int = None,
         dec_kernel_size: int = None,
-        
-        # change from False 
-        deep_supervision: bool = True,              # Can be used to test deep supervision
+        deep_supervision: bool = False,             # Can be used to test deep supervision
         do_res: bool = False,                       # Can be used to individually test residual connection
         do_res_up_down: bool = False,             # Additional 'res' connection on up and down convs
         checkpoint_style: bool = None,            # Either inside block or outside block
