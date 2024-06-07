@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as checkpoint
 
-__all__ = ['create_mednext_v1', 'mednextv1_small', 'mednextv1_base', 'mednextv1_medium', 'mednextv1_large']
+__all__ = ['create_mednext_v1', 'create_mednextv1_small', 'create_mednextv1_base', 'create_mednextv1_medium', 'create_mednextv1_large']
 
 """Block.py"""
 class MedNeXtBlock(nn.Module):
@@ -696,7 +696,7 @@ class MedNeXt(nn.Module):
 #        print(network(x)[0].shape)
 
 """create_mednext_v1.py"""
-def mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=False):
 
     return MedNeXt(
         in_channels = num_input_channels, 
@@ -711,7 +711,7 @@ def mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=False):
     )
 
 
-def mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=False):
 
     return MedNeXt(
         in_channels = num_input_channels, 
@@ -726,7 +726,7 @@ def mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=False):
     )
 
 
-def mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=False):
 
     return MedNeXt(
         in_channels = num_input_channels, 
@@ -742,7 +742,7 @@ def mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=False):
     )
 
 
-def mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=False):
 
     return MedNeXt(
         in_channels = num_input_channels, 
