@@ -696,41 +696,43 @@ class MedNeXt(nn.Module):
 #        print(network(x)[0].shape)
 
 """create_mednext_v1.py"""
-def create_mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=True):
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 32,
+        n_channels = 1,
         n_classes = num_classes, 
         exp_r=2,                         
         kernel_size=kernel_size,         
         deep_supervision=ds,             
         do_res=True,                     
         do_res_up_down = True,
-        block_counts = [2,2,2,2,2,2,2,2,2]
+        block_counts = [2,2,2,2,2,2,2,2,2],
+        dim='2d'
     )
 
 
-def create_mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=True):
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 32,
+        n_channels = 1,
         n_classes = num_classes, 
         exp_r=[2,3,4,4,4,4,4,3,2],       
         kernel_size=kernel_size,         
         deep_supervision=ds,             
         do_res=True,                     
         do_res_up_down = True,
-        block_counts = [2,2,2,2,2,2,2,2,2]
+        block_counts = [2,2,2,2,2,2,2,2,2],
+        dim='2d'
     )
 
 
-def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=True):
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 32,
+        n_channels = 1,
         n_classes = num_classes, 
         exp_r=[2,3,4,4,4,4,4,3,2],       
         kernel_size=kernel_size,         
@@ -738,15 +740,16 @@ def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=F
         do_res=True,                     
         do_res_up_down = True,
         block_counts = [3,4,4,4,4,4,4,4,3],
-        checkpoint_style = 'outside_block'
+        checkpoint_style = 'outside_block',
+        dim='2d'
     )
 
 
-def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=False):
+def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=True):
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 32,
+        n_channels = 1,
         n_classes = num_classes, 
         exp_r=[3,4,8,8,8,8,8,4,3],                          
         kernel_size=kernel_size,                     
@@ -754,7 +757,8 @@ def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=Fa
         do_res=True,                     
         do_res_up_down = True,
         block_counts = [3,4,8,8,8,8,8,4,3],
-        checkpoint_style = 'outside_block'
+        checkpoint_style = 'outside_block',
+        dim='2d'
     )
 
 
