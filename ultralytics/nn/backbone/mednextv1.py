@@ -238,6 +238,12 @@ class LayerNorm(nn.Module):
             u = x.mean(1, keepdim=True)
             s = (x - u).pow(2).mean(1, keepdim=True)
             x = (x - u) / torch.sqrt(s + self.eps)
+            with open("mednext-a_forward_debug.txt", "a") as f:
+              f.write(f"x: {x.size()}\n")
+              f.write(f"weight: {self.weight.size()}\n")
+              f.write(f"bias: {self.bias.size()}\n")
+              f.write(f"normalized_shape: {self.normalized_shape}\n")
+              f.write("\n")
             x = self.weight[:, None, None, None] * x + self.bias[:, None, None, None]
             return x
 
@@ -537,8 +543,7 @@ class MedNeXt(nn.Module):
             self.out_4 = OutBlock(in_channels=n_channels*16, n_classes=n_classes, dim=dim)
 
         self.block_counts = block_counts
-        self.channel = [i.size(1) for i in self.forward(torch.randn(1, 3, 640, 640))] # add for save featuremap channel
-        
+        self.channel = [n_channels, n_channels*2, n_channels*4, n_channels*8, n_channels*16]
 
     def iterative_checkpoint(self, sequential_block, x):
         """
@@ -555,14 +560,24 @@ class MedNeXt(nn.Module):
         
         x = self.stem(x)
         if self.outside_block_checkpointing:
+          with open("mednext-b1_forward_debug.txt", "w") as f:
+            f.write(f"x: {x.size()}\n")
             x_res_0 = self.iterative_checkpoint(self.enc_block_0, x)
+            f.write(f"x_res_0: {x_res_0.size()}\n")
             x = checkpoint.checkpoint(self.down_0, x_res_0, self.dummy_tensor)
+            f.write(f"x: {x.size()}\n")
             x_res_1 = self.iterative_checkpoint(self.enc_block_1, x)
+            f.write(f"x_res_1: {x_res_1.size()}\n")
             x = checkpoint.checkpoint(self.down_1, x_res_1, self.dummy_tensor)
+            f.write(f"x: {x.size()}\n")
             x_res_2 = self.iterative_checkpoint(self.enc_block_2, x)
+            f.write(f"x_res_2: {x_res_2.size()}\n")
             x = checkpoint.checkpoint(self.down_2, x_res_2, self.dummy_tensor)
+            f.write(f"x: {x.size()}\n")
             x_res_3 = self.iterative_checkpoint(self.enc_block_3, x)
+            f.write(f"x_res_3: {x_res_3.size()}\n")
             x = checkpoint.checkpoint(self.down_3, x_res_3, self.dummy_tensor)
+            f.write(f"x: {x.size()}\n")
 
             x = self.iterative_checkpoint(self.bottleneck, x)
             if self.do_ds:
@@ -597,14 +612,24 @@ class MedNeXt(nn.Module):
             x = checkpoint.checkpoint(self.out_0, x, self.dummy_tensor)
 
         else:
+          with open("mednext-b2_forward_debug.txt", "w") as f:
+            f.write(f"x: {x.size()}\n")
             x_res_0 = self.enc_block_0(x)
+            f.write(f"x_res_0: {x_res_0.size()}\n")
             x = self.down_0(x_res_0)
+            f.write(f"x: {x.size()}\n")
             x_res_1 = self.enc_block_1(x)
+            f.write(f"x_res_1: {x_res_1.size()}\n")
             x = self.down_1(x_res_1)
+            f.write(f"x: {x.size()}\n")
             x_res_2 = self.enc_block_2(x)
+            f.write(f"x_res_2: {x_res_2.size()}\n")
             x = self.down_2(x_res_2)
+            f.write(f"x: {x.size()}\n")
             x_res_3 = self.enc_block_3(x)
+            f.write(f"x_res_3: {x_res_3.size()}\n")
             x = self.down_3(x_res_3)
+            f.write(f"x: {x.size()}\n")
 
             x = self.bottleneck(x)
             if self.do_ds:
@@ -700,7 +725,7 @@ def create_mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=Tr
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 1,
+        n_channels = 32,
         n_classes = num_classes, 
         exp_r=2,                         
         kernel_size=kernel_size,         
@@ -708,7 +733,9 @@ def create_mednextv1_small(num_input_channels, num_classes, kernel_size=3, ds=Tr
         do_res=True,                     
         do_res_up_down = True,
         block_counts = [2,2,2,2,2,2,2,2,2],
-        dim='2d'
+        dim='2d',
+        norm_type='layer'
+
     )
 
 
@@ -716,7 +743,7 @@ def create_mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=Tru
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 1,
+        n_channels = 32,
         n_classes = num_classes, 
         exp_r=[2,3,4,4,4,4,4,3,2],       
         kernel_size=kernel_size,         
@@ -724,7 +751,9 @@ def create_mednextv1_base(num_input_channels, num_classes, kernel_size=3, ds=Tru
         do_res=True,                     
         do_res_up_down = True,
         block_counts = [2,2,2,2,2,2,2,2,2],
-        dim='2d'
+        dim='2d',
+        norm_type='layer'
+
     )
 
 
@@ -732,7 +761,7 @@ def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=T
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 1,
+        n_channels = 32,
         n_classes = num_classes, 
         exp_r=[2,3,4,4,4,4,4,3,2],       
         kernel_size=kernel_size,         
@@ -741,7 +770,8 @@ def create_mednextv1_medium(num_input_channels, num_classes, kernel_size=3, ds=T
         do_res_up_down = True,
         block_counts = [3,4,4,4,4,4,4,4,3],
         checkpoint_style = 'outside_block',
-        dim='2d'
+        dim='2d',
+        norm_type='layer'
     )
 
 
@@ -749,7 +779,7 @@ def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=Tr
 
     return MedNeXt(
         in_channels = num_input_channels, 
-        n_channels = 1,
+        n_channels = 32,
         n_classes = num_classes, 
         exp_r=[3,4,8,8,8,8,8,4,3],                          
         kernel_size=kernel_size,                     
@@ -758,7 +788,8 @@ def create_mednextv1_large(num_input_channels, num_classes, kernel_size=3, ds=Tr
         do_res_up_down = True,
         block_counts = [3,4,8,8,8,8,8,4,3],
         checkpoint_style = 'outside_block',
-        dim='2d'
+        dim='2d',
+        norm_type='layer'
     )
 
 
